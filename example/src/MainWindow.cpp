@@ -2,7 +2,7 @@
 #include <MainWindow.hpp>
 
 // QCodeEditor
-#include <QCodeEditor>
+#include <CodeEditor>
 #include <QGLSLCompleter>
 #include <QLuaCompleter>
 #include <QPythonCompleter>
