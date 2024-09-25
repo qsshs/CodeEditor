@@ -1,4 +1,4 @@
-// QCodeEditor
+// CodeEditor
 #include <QLuaCompleter>
 #include <QLanguage>
 
@@ -12,7 +12,7 @@ QLuaCompleter::QLuaCompleter(QObject *parent) :
     // Setting up GLSL types
     QStringList list;
 
-    Q_INIT_RESOURCE(qcodeeditor_resources);
+    Q_INIT_RESOURCE(codeeditor_resources);
     QFile fl(":/languages/lua.xml");
 
     if (!fl.open(QIODevice::ReadOnly))

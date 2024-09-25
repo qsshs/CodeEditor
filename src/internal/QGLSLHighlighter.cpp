@@ -1,4 +1,4 @@
-// QCodeEditor
+// CodeEditor
 #include <QGLSLHighlighter>
 #include <QLanguage>
 #include <QSyntaxStyle>
@@ -16,7 +16,7 @@ QGLSLHighlighter::QGLSLHighlighter(QTextDocument* document) :
     m_commentStartPattern(QRegularExpression(R"(/\*)")),
     m_commentEndPattern  (QRegularExpression(R"(\*/)"))
 {
-    Q_INIT_RESOURCE(qcodeeditor_resources);
+    Q_INIT_RESOURCE(codeeditor_resources);
     QFile fl(":/languages/glsl.xml");
 
     if (!fl.open(QIODevice::ReadOnly))

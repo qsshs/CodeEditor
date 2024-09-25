@@ -1,4 +1,4 @@
-// QCodeEditor
+// CodeEditor
 #include <QPythonCompleter>
 #include <QLanguage>
 
@@ -12,7 +12,7 @@ QPythonCompleter::QPythonCompleter(QObject *parent) :
     // Setting up Python types
     QStringList list;
 
-    Q_INIT_RESOURCE(qcodeeditor_resources);
+    Q_INIT_RESOURCE(codeeditor_resources);
     QFile fl(":/languages/python.xml");
 
     if (!fl.open(QIODevice::ReadOnly))

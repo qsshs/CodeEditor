@@ -1,7 +1,7 @@
 // Demo
 #include <MainWindow.hpp>
 
-// QCodeEditor
+// CodeEditor
 #include <CodeEditor>
 #include <QGLSLCompleter>
 #include <QLuaCompleter>
@@ -131,7 +131,7 @@ void MainWindow::createWidgets()
     setupGroup->setMaximumWidth(300);
 
     // CodeEditor
-    m_codeEditor = new QCodeEditor(this);
+    m_codeEditor = new CodeEditor(this);
     hBox->addWidget(m_codeEditor);
 
     m_codeSampleCombobox  = new QComboBox(setupGroup);
@@ -167,7 +167,7 @@ void MainWindow::createWidgets()
 
 void MainWindow::setupWidgets()
 {
-    setWindowTitle("QCodeEditor Demo");
+    setWindowTitle("CodeEditor Demo");
 
     // CodeEditor
     m_codeEditor->setPlainText  (m_codeSamples[0].second);

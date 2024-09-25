@@ -1,4 +1,4 @@
-// QCodeEditor
+// CodeEditor
 #include <QXMLHighlighter>
 #include <QSyntaxStyle>
 

@@ -13,7 +13,7 @@ class QCheckBox;
 class QSpinBox;
 class QCompleter;
 class QStyleSyntaxHighlighter;
-class QCodeEditor;
+class CodeEditor;
 
 /**
  * @brief Class, that describes demo main window.
@@ -58,7 +58,7 @@ private:
     QSpinBox*  m_tabReplaceNumberSpinbox;
     QCheckBox* m_autoIndentationCheckbox;
 
-    QCodeEditor* m_codeEditor;
+    CodeEditor* m_codeEditor;
 
     QVector<QPair<QString, QString>> m_codeSamples;
     QVector<QPair<QString, QCompleter*>> m_completers;

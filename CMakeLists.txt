@@ -11,7 +11,7 @@ if (${BUILD_CODEEDIROT_EXAMPLE})
 endif()
 
 set(RESOURCES_FILE
-    resources/qcodeeditor_resources.qrc
+    resources/codeeditor_resources.qrc
 )
 
 set(INCLUDE_FILES

@@ -1,4 +1,4 @@
-// QCodeEditor
+// CodeEditor
 #include <QLineNumberArea>
 #include <QSyntaxStyle>
 #include <CodeEditor>
@@ -28,7 +28,7 @@ static QVector<QPair<QString, QString>> parentheses = {
     {"'", "'"}
 };
 
-QCodeEditor::QCodeEditor(QWidget* widget) :
+CodeEditor::CodeEditor(QWidget* widget) :
     QTextEdit(widget),
     m_highlighter(nullptr),
     m_syntaxStyle(nullptr),
@@ -47,7 +47,7 @@ QCodeEditor::QCodeEditor(QWidget* widget) :
     setSyntaxStyle(QSyntaxStyle::defaultStyle());
 }
 
-void QCodeEditor::initDocumentLayoutHandlers()
+void CodeEditor::initDocumentLayoutHandlers()
 {
     document()
         ->documentLayout()
@@ -57,7 +57,7 @@ void QCodeEditor::initDocumentLayoutHandlers()
         );
 }
 
-void QCodeEditor::initFont()
+void CodeEditor::initFont()
 {
     auto fnt = QFontDatabase::systemFont(QFontDatabase::FixedFont);
     fnt.setFixedPitch(true);
@@ -66,13 +66,13 @@ void QCodeEditor::initFont()
     setFont(fnt);
 }
 
-void QCodeEditor::performConnections()
+void CodeEditor::performConnections()
 {
     connect(
         document(),
         &QTextDocument::blockCountChanged,
         this,
-        &QCodeEditor::updateLineNumberAreaWidth
+        &CodeEditor::updateLineNumberAreaWidth
     );
 
     connect(
@@ -85,18 +85,18 @@ void QCodeEditor::performConnections()
         this,
         &QTextEdit::cursorPositionChanged,
         this,
-        &QCodeEditor::updateExtraSelection
+        &CodeEditor::updateExtraSelection
     );
 
     connect(
         this,
         &QTextEdit::selectionChanged,
         this,
-        &QCodeEditor::onSelectionChanged
+        &CodeEditor::onSelectionChanged
     );
 }
 
-void QCodeEditor::setHighlighter(QStyleSyntaxHighlighter* highlighter)
+void CodeEditor::setHighlighter(QStyleSyntaxHighlighter* highlighter)
 {
     if (m_highlighter)
     {
@@ -112,7 +112,7 @@ void QCodeEditor::setHighlighter(QStyleSyntaxHighlighter* highlighter)
     }
 }
 
-void QCodeEditor::setSyntaxStyle(QSyntaxStyle* style)
+void CodeEditor::setSyntaxStyle(QSyntaxStyle* style)
 {
     m_syntaxStyle = style;
 
@@ -127,7 +127,7 @@ void QCodeEditor::setSyntaxStyle(QSyntaxStyle* style)
     updateStyle();
 }
 
-void QCodeEditor::updateStyle()
+void CodeEditor::updateStyle()
 {
     if (m_highlighter)
     {
@@ -162,7 +162,7 @@ void QCodeEditor::updateStyle()
     updateExtraSelection();
 }
 
-void QCodeEditor::onSelectionChanged()
+void CodeEditor::onSelectionChanged()
 {
     auto selected = textCursor().selectedText();
 
@@ -192,14 +192,14 @@ void QCodeEditor::onSelectionChanged()
     }
 }
 
-void QCodeEditor::resizeEvent(QResizeEvent* e)
+void CodeEditor::resizeEvent(QResizeEvent* e)
 {
     QTextEdit::resizeEvent(e);
 
     updateLineGeometry();
 }
 
-void QCodeEditor::updateLineGeometry()
+void CodeEditor::updateLineGeometry()
 {
     QRect cr = contentsRect();
     m_lineNumberArea->setGeometry(
@@ -211,12 +211,12 @@ void QCodeEditor::updateLineGeometry()
     );
 }
 
-void QCodeEditor::updateLineNumberAreaWidth(int)
+void CodeEditor::updateLineNumberAreaWidth(int)
 {
     setViewportMargins(m_lineNumberArea->sizeHint().width(), 0, 0, 0);
 }
 
-void QCodeEditor::updateLineNumberArea(const QRect& rect)
+void CodeEditor::updateLineNumberArea(const QRect& rect)
 {
     m_lineNumberArea->update(
         0,
@@ -232,7 +232,7 @@ void QCodeEditor::updateLineNumberArea(const QRect& rect)
     }
 }
 
-void QCodeEditor::handleSelectionQuery(QTextCursor cursor)
+void CodeEditor::handleSelectionQuery(QTextCursor cursor)
 {
 
     auto searchIterator = cursor;
@@ -246,7 +246,7 @@ void QCodeEditor::handleSelectionQuery(QTextCursor cursor)
     }
 }
 
-void QCodeEditor::updateExtraSelection()
+void CodeEditor::updateExtraSelection()
 {
     QList<QTextEdit::ExtraSelection> extra;
 
@@ -256,7 +256,7 @@ void QCodeEditor::updateExtraSelection()
     setExtraSelections(extra);
 }
 
-void QCodeEditor::highlightParenthesis(QList<QTextEdit::ExtraSelection>& extraSelection)
+void CodeEditor::highlightParenthesis(QList<QTextEdit::ExtraSelection>& extraSelection)
 {
     auto currentSymbol = charUnderCursor();
     auto prevSymbol = charUnderCursor(-1);
@@ -353,7 +353,7 @@ void QCodeEditor::highlightParenthesis(QList<QTextEdit::ExtraSelection>& extraSe
     }
 }
 
-void QCodeEditor::highlightCurrentLine(QList<QTextEdit::ExtraSelection>& extraSelection)
+void CodeEditor::highlightCurrentLine(QList<QTextEdit::ExtraSelection>& extraSelection)
 {
     if (!isReadOnly())
     {
@@ -369,13 +369,13 @@ void QCodeEditor::highlightCurrentLine(QList<QTextEdit::ExtraSelection>& extraSe
     }
 }
 
-void QCodeEditor::paintEvent(QPaintEvent* e)
+void CodeEditor::paintEvent(QPaintEvent* e)
 {
     updateLineNumberArea(e->rect());
     QTextEdit::paintEvent(e);
 }
 
-int QCodeEditor::getFirstVisibleBlock()
+int CodeEditor::getFirstVisibleBlock()
 {
     // Detect the first block for which bounding rect - once translated
     // in absolute coordinated - is contained by the editor's text area
@@ -409,7 +409,7 @@ int QCodeEditor::getFirstVisibleBlock()
     return 0;
 }
 
-bool QCodeEditor::proceedCompleterBegin(QKeyEvent *e)
+bool CodeEditor::proceedCompleterBegin(QKeyEvent *e)
 {
     if (m_completer &&
         m_completer->popup()->isVisible())
@@ -435,7 +435,7 @@ bool QCodeEditor::proceedCompleterBegin(QKeyEvent *e)
 
 }
 
-void QCodeEditor::proceedCompleterEnd(QKeyEvent *e)
+void CodeEditor::proceedCompleterEnd(QKeyEvent *e)
 {
     auto ctrlOrShift = e->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier);
 
@@ -475,7 +475,7 @@ void QCodeEditor::proceedCompleterEnd(QKeyEvent *e)
     m_completer->complete(cursRect);
 }
 
-void QCodeEditor::keyPressEvent(QKeyEvent* e) {
+void CodeEditor::keyPressEvent(QKeyEvent* e) {
 #if QT_VERSION >= 0x050A00
   const int defaultIndent = tabStopDistance() / fontMetrics().averageCharWidth();
 #else
@@ -590,49 +590,49 @@ void QCodeEditor::keyPressEvent(QKeyEvent* e) {
     proceedCompleterEnd(e);
 }
 
-void QCodeEditor::setAutoIndentation(bool enabled)
+void CodeEditor::setAutoIndentation(bool enabled)
 {
     m_autoIndentation = enabled;
 }
 
-bool QCodeEditor::autoIndentation() const
+bool CodeEditor::autoIndentation() const
 {
     return m_autoIndentation;
 }
 
-void QCodeEditor::setAutoParentheses(bool enabled)
+void CodeEditor::setAutoParentheses(bool enabled)
 {
     m_autoParentheses = enabled;
 }
 
-bool QCodeEditor::autoParentheses() const
+bool CodeEditor::autoParentheses() const
 {
     return m_autoParentheses;
 }
 
-void QCodeEditor::setTabReplace(bool enabled)
+void CodeEditor::setTabReplace(bool enabled)
 {
     m_replaceTab = enabled;
 }
 
-bool QCodeEditor::tabReplace() const
+bool CodeEditor::tabReplace() const
 {
     return m_replaceTab;
 }
 
-void QCodeEditor::setTabReplaceSize(int val)
+void CodeEditor::setTabReplaceSize(int val)
 {
     m_tabReplace.clear();
 
     m_tabReplace.fill(' ', val);
 }
 
-int QCodeEditor::tabReplaceSize() const
+int CodeEditor::tabReplaceSize() const
 {
     return m_tabReplace.size();
 }
 
-void QCodeEditor::setCompleter(QCompleter *completer)
+void CodeEditor::setCompleter(QCompleter *completer)
 {
     if (m_completer)
     {
@@ -653,11 +653,11 @@ void QCodeEditor::setCompleter(QCompleter *completer)
         m_completer,
         QOverload<const QString&>::of(&QCompleter::activated),
         this,
-        &QCodeEditor::insertCompletion
+        &CodeEditor::insertCompletion
     );
 }
 
-void QCodeEditor::focusInEvent(QFocusEvent *e)
+void CodeEditor::focusInEvent(QFocusEvent *e)
 {
     if (m_completer)
     {
@@ -667,7 +667,7 @@ void QCodeEditor::focusInEvent(QFocusEvent *e)
     QTextEdit::focusInEvent(e);
 }
 
-void QCodeEditor::insertCompletion(QString s)
+void CodeEditor::insertCompletion(QString s)
 {
     if (m_completer->widget() != this)
     {
@@ -680,12 +680,12 @@ void QCodeEditor::insertCompletion(QString s)
     setTextCursor(tc);
 }
 
-QCompleter *QCodeEditor::completer() const
+QCompleter *CodeEditor::completer() const
 {
     return m_completer;
 }
 
-QChar QCodeEditor::charUnderCursor(int offset) const
+QChar CodeEditor::charUnderCursor(int offset) const
 {
     auto block = textCursor().blockNumber();
     auto index = textCursor().positionInBlock();
@@ -701,19 +701,19 @@ QChar QCodeEditor::charUnderCursor(int offset) const
     return text[index];
 }
 
-QString QCodeEditor::wordUnderCursor() const
+QString CodeEditor::wordUnderCursor() const
 {
     auto tc = textCursor();
     tc.select(QTextCursor::WordUnderCursor);
     return tc.selectedText();
 }
 
-void QCodeEditor::insertFromMimeData(const QMimeData* source)
+void CodeEditor::insertFromMimeData(const QMimeData* source)
 {
     insertPlainText(source->text());
 }
 
-int QCodeEditor::getIndentationSpaces()
+int CodeEditor::getIndentationSpaces()
 {
     auto blockText = textCursor().block().text();
 

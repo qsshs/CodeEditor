@@ -3,7 +3,7 @@
 // Qt
 #include <QWidget> // Required for inheritance
 
-class QCodeEditor;
+class CodeEditor;
 class QSyntaxStyle;
 
 /**
@@ -19,7 +19,7 @@ public:
      * @brief Constructor.
      * @param parent Pointer to parent QTextEdit widget.
      */
-    explicit QLineNumberArea(QCodeEditor* parent=nullptr);
+    explicit QLineNumberArea(CodeEditor* parent=nullptr);
 
     // Disable copying
     QLineNumberArea(const QLineNumberArea&) = delete;
@@ -50,7 +50,7 @@ private:
 
     QSyntaxStyle* m_syntaxStyle;
 
-    QCodeEditor* m_codeEditParent;
+    CodeEditor* m_codeEditParent;
 
 };
 

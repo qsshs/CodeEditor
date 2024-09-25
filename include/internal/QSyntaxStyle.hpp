@@ -8,7 +8,7 @@
 
 /**
  * @brief Class, that describes Qt style
- * parser for QCodeEditor.
+ * parser for CodeEditor.
  */
 class QSyntaxStyle : public QObject
 {

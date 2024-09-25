@@ -12,7 +12,7 @@ class QFramedTextAttribute;
 /**
  * @brief Class, that describes code editor.
  */
-class QCodeEditor : public QTextEdit
+class CodeEditor : public QTextEdit
 {
     Q_OBJECT
 
@@ -21,11 +21,11 @@ public:
      * @brief Constructor.
      * @param widget Pointer to parent widget.
      */
-    explicit QCodeEditor(QWidget* widget=nullptr);
+    explicit CodeEditor(QWidget *widget = nullptr);
 
     // Disable copying
-    QCodeEditor(const QCodeEditor&) = delete;
-    QCodeEditor& operator=(const QCodeEditor&) = delete;
+    CodeEditor(const CodeEditor &) = delete;
+    CodeEditor &operator=(const CodeEditor &) = delete;
 
     /**
      * @brief Method for getting first visible block

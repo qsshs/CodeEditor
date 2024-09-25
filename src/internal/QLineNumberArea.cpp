@@ -1,4 +1,4 @@
-// QCodeEditor
+// CodeEditor
 #include <QLineNumberArea>
 #include <QSyntaxStyle>
 #include <CodeEditor>
@@ -11,7 +11,7 @@
 #include <QScrollBar>
 #include <QAbstractTextDocumentLayout>
 
-QLineNumberArea::QLineNumberArea(QCodeEditor* parent) :
+QLineNumberArea::QLineNumberArea(CodeEditor* parent) :
     QWidget(parent),
     m_syntaxStyle(nullptr),
     m_codeEditParent(parent)

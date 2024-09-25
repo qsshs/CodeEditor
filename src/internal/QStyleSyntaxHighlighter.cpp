@@ -1,4 +1,4 @@
-// QCodeEditor
+// CodeEditor
 #include <QStyleSyntaxHighlighter>
 
 QStyleSyntaxHighlighter::QStyleSyntaxHighlighter(QTextDocument* document) : 
